@@ -33,6 +33,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>embedded</DebugType>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
   </PropertyGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)docs/banner.png" Visible="false" Pack="true" PackagePath="docs/" />
