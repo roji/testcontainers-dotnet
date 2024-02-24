@@ -156,7 +156,7 @@ Task("Publish-NuGet-Packages")
   .WithCriteria(() => param.ShouldPublish)
   .Does(() =>
 {
-  foreach(var package in GetFiles($"{param.Paths.Directories.NuGetDirectoryPath}/*.nupkg"))
+  foreach (var package in GetFiles($"{param.Paths.Directories.NuGetDirectoryPath}/*.nupkg"))
   {
     DotNetNuGetPush(package.FullPath, new DotNetNuGetPushSettings
     {
