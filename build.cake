@@ -67,6 +67,7 @@ Task("Build")
     Verbosity = param.Verbosity,
     NoRestore = true,
     ArgumentCustomization = args => args
+      .Append($"/p:ContinuousIntegrationBuild=true")
   });
 });
 
