@@ -130,7 +130,6 @@ Task("Create-NuGet-Packages")
     Verbosity = param.Verbosity,
     NoRestore = true,
     NoBuild = true,
-    IncludeSymbols = false,
     OutputDirectory = param.Paths.Directories.NuGetDirectoryPath,
     ArgumentCustomization = args => args
       .Append($"/p:Version={param.Version}")
