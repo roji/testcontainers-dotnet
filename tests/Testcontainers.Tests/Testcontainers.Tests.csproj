@@ -5,7 +5,6 @@
     <IsPublishable>false</IsPublishable>
     <Configurations>Debug;Release</Configurations>
     <RootNamespace>DotNet.Testcontainers.Tests</RootNamespace>
-    <ContinuousIntegrationBuild>false</ContinuousIntegrationBuild>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>

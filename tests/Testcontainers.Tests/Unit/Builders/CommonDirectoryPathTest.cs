@@ -1,36 +1,26 @@
-using Xunit.Abstractions;
-
 namespace DotNet.Testcontainers.Tests.Unit
 {
-  using System.Collections.Generic;
   using System.IO;
   using DotNet.Testcontainers.Builders;
   using Xunit;
 
   public sealed class CommonDirectoryPathTest
   {
-    private readonly ITestOutputHelper _testOutputHelper;
-
-    public CommonDirectoryPathTest(ITestOutputHelper testOutputHelper)
+    public static TheoryData<CommonDirectoryPath> CommonDirectoryPaths()
     {
-      _testOutputHelper = testOutputHelper;
+      var theoryData = new TheoryData<CommonDirectoryPath>();
+      theoryData.Add(CommonDirectoryPath.GetBinDirectory());
+      theoryData.Add(CommonDirectoryPath.GetGitDirectory());
+      theoryData.Add(CommonDirectoryPath.GetProjectDirectory());
+      theoryData.Add(CommonDirectoryPath.GetSolutionDirectory());
+      theoryData.Add(CommonDirectoryPath.GetCallerFileDirectory());
+      return theoryData;
     }
-
-    public static IEnumerable<object[]> CommonDirectoryPaths { get; }
-      = new[]
-      {
-        new[] { (object)CommonDirectoryPath.GetBinDirectory() },
-        new[] { (object)CommonDirectoryPath.GetGitDirectory() },
-        new[] { (object)CommonDirectoryPath.GetProjectDirectory() },
-        new[] { (object)CommonDirectoryPath.GetSolutionDirectory() },
-        new[] { (object)CommonDirectoryPath.GetCallerFileDirectory() },
-      };
 
     [Theory]
     [MemberData(nameof(CommonDirectoryPaths))]
     public void CommonDirectoryPathExists(CommonDirectoryPath commonDirectoryPath)
     {
-      _testOutputHelper.WriteLine($"CommonDirectoryPathExists => {commonDirectoryPath.DirectoryPath}");
       Assert.True(Directory.Exists(commonDirectoryPath.DirectoryPath));
     }
 
