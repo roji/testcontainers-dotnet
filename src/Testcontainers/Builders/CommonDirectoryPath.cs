@@ -114,7 +114,7 @@ namespace DotNet.Testcontainers.Builders
     {
       if (path != null)
       {
-        return path.EnumerateFileSystemInfos(searchPattern, SearchOption.TopDirectoryOnly).Any() ? path.FullName : GetDirectoryPath(path.Parent, searchPattern);
+        return path.EnumerateFileSystemInfos(searchPattern, SearchOption.TopDirectoryOnly).Any() ? path.FullName : GetDirectoryPath(path.Parent, searchPattern, originalPath);
       }
 
       var message = $"Cannot find '{searchPattern}' and resolve the base directory in the directory tree of '{originalPath}'.";
