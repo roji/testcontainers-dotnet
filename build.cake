@@ -67,7 +67,6 @@ Task("Build")
     Verbosity = param.Verbosity,
     NoRestore = true,
     ArgumentCustomization = args => args
-      .Append($"/p:ContinuousIntegrationBuild=true")
   });
 });
 
@@ -125,15 +124,24 @@ Task("Create-NuGet-Packages")
   .WithCriteria(() => param.ShouldPublish)
   .Does(() =>
 {
+  // TODO: Generate the Semantic Version number from GitHub Actions workflow tag
+  // events, together with GitVersion.
+  var hyphenIndex = param.Version.IndexOf('-');
+
+  var versionInfo = param.Version.Substring(0, hyphenIndex >= 0 ? hyphenIndex : param.Version.Length);
+
   DotNetPack(param.Solution, new DotNetPackSettings
   {
     Configuration = param.Configuration,
     Verbosity = param.Verbosity,
-    NoRestore = true,
-    NoBuild = true,
     OutputDirectory = param.Paths.Directories.NuGetDirectoryPath,
-    ArgumentCustomization = args => args
-      .Append($"/p:Version={param.Version}")
+    MSBuildSettings = new DotNetMSBuildSettings
+    {
+      Version = param.Version,
+      AssemblyVersion = versionInfo,
+      FileVersion = versionInfo,
+      ContinuousIntegrationBuild = !param.IsLocalBuild
+    }
   });
 });
 
