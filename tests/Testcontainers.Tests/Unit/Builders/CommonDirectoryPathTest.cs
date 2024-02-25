@@ -1,3 +1,5 @@
+using Xunit.Abstractions;
+
 namespace DotNet.Testcontainers.Tests.Unit
 {
   using System.Collections.Generic;
@@ -7,6 +9,13 @@ namespace DotNet.Testcontainers.Tests.Unit
 
   public sealed class CommonDirectoryPathTest
   {
+    private readonly ITestOutputHelper _testOutputHelper;
+
+    public CommonDirectoryPathTest(ITestOutputHelper testOutputHelper)
+    {
+      _testOutputHelper = testOutputHelper;
+    }
+
     public static IEnumerable<object[]> CommonDirectoryPaths { get; }
       = new[]
       {
@@ -21,6 +30,7 @@ namespace DotNet.Testcontainers.Tests.Unit
     [MemberData(nameof(CommonDirectoryPaths))]
     public void CommonDirectoryPathExists(CommonDirectoryPath commonDirectoryPath)
     {
+      _testOutputHelper.WriteLine($"CommonDirectoryPathExists => {commonDirectoryPath.DirectoryPath}");
       Assert.True(Directory.Exists(commonDirectoryPath.DirectoryPath));
     }
 
