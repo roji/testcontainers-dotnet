@@ -5,6 +5,7 @@
     <IsPublishable>false</IsPublishable>
     <Configurations>Debug;Release</Configurations>
     <RootNamespace>DotNet.Testcontainers.Tests</RootNamespace>
+    <EnableSourceLink>false</EnableSourceLink>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
